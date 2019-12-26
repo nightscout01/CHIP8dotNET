@@ -283,13 +283,13 @@ namespace CHIP8EMU
                     PC += 2;
                     break;
                 case 0xD000:  // opcode 0xDXYN
-                              /* Draws a sprite at coordinate (VX, VY) that has a width of 8 pixels and a height of N pixels. 
-                               * Each row of 8 pixels is read as bit-coded starting from memory location I; I value doesn’t change after 
-                               * the execution of this instruction. As described above, 
-                               * VF is set to 1 if any screen pixels are flipped from set to unset when the sprite is drawn, 
-                               * and to 0 if that doesn’t happen
-                               */
-                              // Do some fancy signaling to notify graphics subsystem.
+                    /* Draws a sprite at coordinate (VX, VY) that has a width of 8 pixels and a height of N pixels. 
+                     * Each row of 8 pixels is read as bit-coded starting from memory location I; I value doesn’t change after 
+                     * the execution of this instruction. As described above, 
+                     * VF is set to 1 if any screen pixels are flipped from set to unset when the sprite is drawn, 
+                     * and to 0 if that doesn’t happen
+                     */
+                    // Do some fancy signaling to notify graphics subsystem.
                     PC += 2;
                     break;
                 case 0xE000:  // opcode 0xEXNN
