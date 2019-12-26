@@ -18,9 +18,6 @@ namespace CHIP8EMU
         private readonly CPU emuCPU;  // our emulated CHIP-8 CPU
         private readonly Timer cycleTimer;
 
-
-        // PUT SOME GRAPHICS STUFF HERE (maybe)?
-
         public CHIP8()
         {
             RAM = new byte[4096];  // initialize the byte array that holds our emulated memory 
