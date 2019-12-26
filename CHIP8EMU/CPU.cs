@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Copyright Maurice Montag 2019
+// All Rights Reserved
+// See LICENSE file for more information
+
+using System;
 using System.Collections.Generic;
 
 namespace CHIP8EMU
