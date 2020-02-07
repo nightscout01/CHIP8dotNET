@@ -14,19 +14,12 @@ namespace CHIP8EMU
         private byte delay_timer;  // the closest thing to an interupt that a CHIP-8 system has
         private byte sound_timer;  // when this one osn't zero, there's a beep
         private const uint FONT_BASE = 0x0;
-        //private uint clock_speed;
         private readonly System.Diagnostics.Stopwatch stopWatch;
-        private long timestamp;
+        private readonly long timestamp;
         private readonly byte[] Vreg;
         // ushort is an unsigned 16 bit integer (VS complains when using UInt16)
         private ushort I;  // index register, 16 bits  (NOT THE INSTRUCTION POINTER)
         private ushort PC;  // program counter/instruction pointer, 16 bits
-
-        // both timers when set decrease at 60Hz until they
-        // are these timers actually CPU things or should they be somewhere else?
-
-        //private ushort[] stack = new ushort[16];  // maximum stack depth of the CHIP-8 specification is 16, we need to have a stack array with enough space for 16
-        // 16 bit addresses
 
         private readonly Stack<ushort> programStack;
         private ushort SP;  // the stack pointer. (I ended up using a stack object instead, but this value is kept for historical reasons)
@@ -35,12 +28,9 @@ namespace CHIP8EMU
         private ushort currentOPCode;  // CHIP-8 opcodes are 16 bits long (maybe we don't need this as a global)
         private readonly Random rnd;  // a random number generator
 
-        //  private Dictionary<int, Func<ushort, bool>> lookupTable = new Dictionary<int, Func<ushort, bool>>();
-
         public CPU(byte[] RAM)
         {
             memory = RAM;  // take our emulated RAM, with our program already loaded in
-            //this.clock_speed = clock_speed;  // set our clock speed, so we can know when to decrement our timers
             stopWatch = new System.Diagnostics.Stopwatch();
             delay_timer = 0;
             sound_timer = 0;
@@ -62,7 +52,7 @@ namespace CHIP8EMU
             I = 0;
             SP = 0;
             // clear anything else that needs clearing
-            return true;  // TODO
+            return true;  // TODO for checking if there's something wrong with the initialization.
         }
 
         public void EmulateCycle()  // this function will be called A LOT, for purposes of speed, we're not checking if the program is initialized
@@ -289,7 +279,7 @@ namespace CHIP8EMU
                      * VF is set to 1 if any screen pixels are flipped from set to unset when the sprite is drawn, 
                      * and to 0 if that doesn’t happen
                      */
-                    // Do some fancy signaling to notify graphics subsystem.
+                    // TODO: Do some fancy signaling to notify graphics subsystem.
                     PC += 2;
                     break;
                 case 0xE000:  // opcode 0xEXNN
@@ -355,10 +345,10 @@ namespace CHIP8EMU
                             break;
                         case 0x29:  // 	Sets I to the location of the sprite for the character in VX. Characters 0-F 
                             // (in hexadecimal) are represented by a 4x5 font.
-                            I = (ushort)(FONT_BASE + (Vx * 5));  // lets just pray that this works
+                            I = (ushort)(FONT_BASE + (Vx * 5));
                             PC += 2;
                             break;
-                        case 0x33:  // BCD stuff, i have no idea what this "actually" does, but 
+                        case 0x33:
                             /*
                              * "Stores the binary-coded decimal representation of VX, 
                              * with the most significant of three digits at the address in I, 
@@ -402,7 +392,7 @@ namespace CHIP8EMU
             // two byte OPCODE for this system
             // this code was kinda haphazardly ported from C++, it's here only as a debugging tool to see which
             // the actual names of the operations instead of just hex.
-            // this dissasembler was ported to C# from a public domain C++ version from emulator101.
+            // this dissasembler was ported to C# from a public domain C++ version.
             byte[] code = new byte[2];
             code[0] = (byte)(opCode >> 8);  // MSB
             code[1] = (byte)(opCode & 255);  // LSB

@@ -11,8 +11,6 @@ namespace CHIP8EMU
         // it was written to gain experience writing a simple emulator
     {
         private readonly byte[] RAM;  // our emulated system RAM
-       // private byte[,] GraphicsArray;  // our 2D graphics array
-       // private readonly byte[] key;  // the weird hex keyboard this thing uses
         private const ushort PROGRAM_START = 0x200;  // usual start location of code in program ROM. (512) in decimal
         private const uint CLOCK_SPEED = 2000;  // our emulated clock speed in Hz
         private readonly CPU emuCPU;  // our emulated CHIP-8 CPU
@@ -21,8 +19,6 @@ namespace CHIP8EMU
         public CHIP8()
         {
             RAM = new byte[4096];  // initialize the byte array that holds our emulated memory 
-            //  GraphicsArray = new byte[64, 32];  // CHIP-8 graphics are a black and white 64x32 grid
-            // key = new byte[16];  // CHIP-8 has a strange hex based keyboard, this is where we store the keypresses.
             cycleTimer = new Timer
             {
                 AutoReset = true
@@ -39,24 +35,10 @@ namespace CHIP8EMU
             emuCPU.EmulateCycle();
         }
 
-        public void TimedEmulation()
-        {
-            //loop at 100HZ WHILE()
-            // 500 Hz means 500 ops/second. 
-
-
-            // ENDWHILE
-        }
-
         public void BeginEmulation()
         {
             cycleTimer.Start();
             Console.WriteLine("started timer");
-            //while (true)
-            //{
-            //    emuCPU.EmulateCycle(); // :OOOO
-            //    Thread.Sleep(100);
-            //}
         }
 
         /// <summary>
