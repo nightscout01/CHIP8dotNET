@@ -390,7 +390,7 @@ namespace CHIP8EMU
         private void DisassembleOpCode(ushort opCode)
         {
             // two byte OPCODE for this system
-            // this code was kinda haphazardly ported from C++, it's here only as a debugging tool to see which
+            // this code was kinda haphazardly ported from C++, it's here only as a debugging tool to see
             // the actual names of the operations instead of just hex.
             // this dissasembler was ported to C# from a public domain C++ version.
             byte[] code = new byte[2];
