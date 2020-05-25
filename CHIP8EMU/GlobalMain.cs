@@ -9,7 +9,7 @@ namespace CHIP8EMU
 {
     class GlobalMain  // split this class up when needed
     {
-        private const string ROM_PATH = @"C:\Users\night\Downloads\DivisionTest.ch8";  // path to rom image to load
+        private const string ROM_PATH = @"C:\user\pathToROM";  // path to rom image to load
         static void Main(string[] args)
         {
             CHIP8 chip8 = new CHIP8();  // temp for now
